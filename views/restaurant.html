@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Chat</title>
+    <link rel="stylesheet" href="/css/styles-restaurant.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module" src="/js/script-restaurant.js" defer></script>
+    
+</head>
+<body>
+    <div class="chat-container">
+
+        <div class="chat-header">
+            <h1>Discussions au restaurant</h1>
+            <button onclick="window.location.href='/exerciseSelection.html'" class="back-btn" style="margin-top:10px;">Retour au menu</button>
+        </div>
+
+        <div class="chat-box" id="chatBox">
+        </div>
+
+        <div id="words-to-use">
+        </div>
+
+        <div class="input-area">
+            <textarea type="text" id="userInput" placeholder="Tapez votre message ici..."></textarea>
+            <button type="submit" id="sendButton">Envoyer</button>
+        </div>
+
+    </div>
+    
+</body>
+</html>

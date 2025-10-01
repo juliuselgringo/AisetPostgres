@@ -1,0 +1,62 @@
+:root{
+    --main-color:rgba(255, 166, 0, 0.774);
+    --second-color:rgba(255, 166, 0, 0.333);
+}
+
+body{
+    background: linear-gradient(0deg,var(--main-color) 0%, white 100%);
+    width: 100vw;
+    height: 150vh;
+    justify-content: center;
+    text-align: center;
+}
+
+.login-form,.register-form{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 10vw;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 350px;
+    border:1px solid black;
+    border-radius: 8px;
+    box-shadow: 3px 3px 3px 3px rgb(179, 178, 178);
+}
+
+.login-form{
+    display:none;
+}
+
+label,input,button{
+    margin: auto;
+    margin-top: 20px;
+    width:15vw;
+    
+}
+
+#link{
+    margin-top: 50px;
+}
+
+button{
+    width: fit-content;
+    margin:auto;
+    margin-top: 20px;
+    background-color: var(--second-color);
+}
+
+header {
+    background-color: var(--second-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+#restaurant-button, #guess-button{
+
+    width: 15vw;
+    height: 30vh;
+    border-radius: 5px;
+
+}

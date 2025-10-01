@@ -1,0 +1,78 @@
+:root{
+    --main-color:rgba(255, 166, 0, 0.774);
+    --second-color:rgba(255, 166, 0, 0.333);
+}
+
+body{
+    background: linear-gradient(0deg,var(--main-color) 0%, white 100%);
+    width: 100vw;
+    height: 150vh;
+    justify-content: center;
+    text-align: center;
+}
+
+#chatBox, #theCat, #you{
+    border:1px solid black;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#chatBox{
+    width:70vw;
+    height:60vh;
+    margin:auto;
+    overflow-y: auto;
+    text-align: left;
+    box-shadow: 3px 3px 3px 3px rgb(179, 178, 178);
+}
+
+#theCat{
+    justify-self:left;
+    background-color: var(--second-color);
+}
+
+#you{
+    justify-self: right;
+    text-align: right;
+    background-color: white;
+}
+
+#words-to-use{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px;
+}
+
+.word{
+    background-color: white;
+    border:1px solid black;
+    border-radius: 5px;
+    width:fit-content;
+    padding: 5px;
+    margin:5px;
+    box-shadow: 3px 3px 3px 3px rgb(179, 178, 178);
+}
+
+.input-area{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#userInput{
+    width:60vw;
+    height: 4em;
+    margin: 5px;
+    border-radius: 8px;
+    box-shadow: 3px 3px 3px 3px rgb(179, 178, 178);
+}
+
+#sendButton{
+    height: 4em;
+    background-color: var(--second-color);
+    margin: 5px;
+    border-radius: 8px;
+    box-shadow: 3px 3px 3px 3px rgb(179, 178, 178);
+}

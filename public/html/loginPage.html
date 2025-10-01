@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial-scale=1.0>
+    <title>Se connecter / Créer un compte</title>
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module" src="../js/script-login.js" defer></script>
+    
+</head>
+<body>
+    <div>
+        <form class="login-form" action="" method="" style="display:flex">
+            <label for="email-login">Saisissez votre email: </label>
+            <input id="email-login" type="email"  required >
+
+            <label for="password-login">Saisissez votre mot de passe: </label>
+            <input id="password-login" type="password" pattern="^[A-Za-z\d@$!%*?&]{5,10}$"  required >
+            <small id="security-login">Minimum 4 caractères.<br> Caractères alphanumériques et @ $ ! % * ? & </small>
+
+            <button id="connect-button" type="submit">Se connecter</button>
+        </form>
+    </div>
+    <div>
+        <form class="register-form" id="user-form" action="" method="" style="display:none">
+            <label for="pseudo">Saisissez votre pseudo: </label>
+            <input id="pseudo" type="text" required>
+
+            <label for="email">Saisissez votre email: </label>
+            <input id="email" type="email"  required >
+
+            <label for="password">Saisissez votre mot de passe: </label>
+            <input id="password" type="password" pattern="^[A-Za-z\d@$!%*?&]{5,10}$"  required >
+            <small id="security">Minimum 4 caractères.<br> Caractères alphanumériques et @ $ ! % * ? & </small>
+            
+            <label for="password-confirmation">Confirmez votre mot de passe: </label>
+            <input id="password-confirmation" type="password" pattern="^[A-Za-z\d@$!%*?&]{5,10}$"  required >
+
+            <button id="save-button" type="submit">Enregistrer</button>
+        </form>
+    </div>
+    <div id="link">
+        <a href="/index.html">Créer un compte</a>
+    </div>
+
+</body>
