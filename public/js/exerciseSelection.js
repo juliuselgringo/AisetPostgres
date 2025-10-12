@@ -1,8 +1,6 @@
-import { logoutfct } from './functions/logoutfct.js';
-
-const API_URL = window.location.hostname === 'localhost' 
+/*const API_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3000' 
-    : 'https://aiset.juliuselgringo.fr';
+    : 'https://aiset.juliuselgringo.fr';*/
 
 
 
@@ -15,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         
         try {
-            const response = await fetch(`${API_URL}/restaurant.html`, {
+            const response = await fetch(`$/restaurant.html`, {
                 method: 'GET',
                 credentials: 'include' // Inclure les cookies
             });
@@ -37,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         try{
-            const response = await fetch(`${API_URL}/guess.html`, {
+            const response = await fetch(`$/guess.html`, {
                 method: 'GET',
                 credentials: 'include'
             });

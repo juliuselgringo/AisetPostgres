@@ -1,8 +1,8 @@
-const API_URL = window.location.hostname === 'localhost' 
+/*const API_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3000' 
-    : 'https://aiset.juliuselgringo.fr';
+    : 'https://aiset.juliuselgringo.fr';*/
 
-export async function loginfct(e){
+async function loginfct(e){
 
     const emailLoginInput = document.getElementById("email-login");
     const passwordLoginInput = document.getElementById("password-login");
@@ -25,7 +25,7 @@ export async function loginfct(e){
     }
 
     try {
-        const response = await fetch(`${API_URL}/auth/login`, {
+        const response = await fetch(`/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,10 +1,10 @@
-const API_URL = window.location.hostname === 'localhost' 
+/*const API_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3000' 
-    : 'https://aiset.juliuselgringo.fr';
+    : 'https://aiset.juliuselgringo.fr';*/
 
-export async function logoutfct() {
+async function logoutfct() {
     try {
-        const response = await fetch(`${API_URL}/auth/logout`, {
+        const response = await fetch(`/auth/logout`, {
             method: 'POST',
             credentials: 'include'
         });

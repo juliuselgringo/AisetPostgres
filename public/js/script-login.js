@@ -1,4 +1,4 @@
-import { loginfct } from './functions/loginfct.js';
+//import { loginfct } from './functions/loginfct.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginBtn = document.getElementById("connect-button");
