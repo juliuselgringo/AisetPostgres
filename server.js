@@ -8,11 +8,6 @@ const mistral = require('@mistralai/mistralai');
 const authRoutes = require('./routes/authRoutes.js');
 const verifyToken = require('./middlewares/verifyToken.js');
 
-// wrapper o2switch
-if(typeof PhusionPassenger !== "undefined"){
-    PhusionPassenger({autoInstall: false})
-}
-
 const app = express();
 const PORT = 3000;
 
