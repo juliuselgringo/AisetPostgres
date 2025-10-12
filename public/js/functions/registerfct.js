@@ -1,6 +1,6 @@
-/*const API_URL = window.location.hostname === 'localhost' 
+const API_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3000' 
-    : 'https://aiset.juliuselgringo.fr';*/
+    : 'https://aiset.juliuselgringo.fr';
 
 async function registerfct(e){    
     
@@ -36,7 +36,7 @@ async function registerfct(e){
         
 
         try{
-            const response = await fetch (`$/auth/register`, {
+            const response = await fetch (`${API_URL}/auth/register`, {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'
