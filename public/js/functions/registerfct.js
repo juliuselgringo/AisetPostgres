@@ -36,7 +36,7 @@ async function registerfct(e){
         
 
         try{
-            const response = await fetch (`${API_URL}/auth/register`, {
+            const response = await fetch (API_URL + '/auth/register', {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'
