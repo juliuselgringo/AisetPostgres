@@ -25,8 +25,7 @@ const client = apiKey ? new mistral.Mistral({ apiKey }) : null;
 const allowedOrigins = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'https://votre-domaine.com', // Remplacer par votre domaine de production
-    // Ajoutez d'autres domaines autorisés ici
+    'https://aiset.juliuselgringo.fr',
 ];
 
 app.use(cors({
