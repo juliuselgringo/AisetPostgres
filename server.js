@@ -14,7 +14,7 @@ if(typeof PhusionPassenger !== "undefined"){
 }
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 config();
 const apiKey = process.env.MISTRAL_API_KEY;
