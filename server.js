@@ -1,24 +1,14 @@
-// npm init -y pour gérer les dépendances
-// npm install dotenv
-// npm install @mistralai/mistralai
-// modifier package.json, add "type" : "module" 
+const express = require('express');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const path = require('path');
+const { config } = require('dotenv');
+const mistral = require('@mistralai/mistralai');
 
-import express from 'express';
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import path from 'path';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { config } from 'dotenv';
-import { Mistral } from '@mistralai/mistralai';
+const authRoutes = require('./routes/authRoutes.js');
+const verifyToken = require('./middlewares/verifyToken.js');
 
-import authRoutes from './routes/authRoutes.js';
-import verifyToken from './middlewares/verifyToken.js';
-
-import { testDbConnection } from './models/db.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname= dirname(__filename);
+const testDbConnection = require('./models/db.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,15 +20,17 @@ const apiKey = process.env.MISTRAL_API_KEY;
 if (!apiKey) {
     console.warn('[MISTRAL] Aucune clé API trouvée (MISTRAL_API_KEY). La route /api/chat renverra une erreur 503.');
 }
-const client = apiKey ? new Mistral({ apiKey }) : null;
 
+const client = apiKey ? new mistral.Mistral({ apiKey }) : null;
+
+// Définition des origines autorisées pour CORS
 const allowedOrigins = [
-    process.env.PUBLIC_URL,
-    'https://aiset.juliuselgringo.fr',
-    'http://localhost:3000'
-].filter(Boolean);
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'https://votre-domaine.com', // Remplacer par votre domaine de production
+    // Ajoutez d'autres domaines autorisés ici
+];
 
-app.set('trust proxy', 1); // important derrière un reverse proxy (SSL)
 app.use(cors({
   origin: (origin, cb) => {
     if (!origin) return cb(null, true); // requêtes internes / same-origin
@@ -104,39 +96,16 @@ app.post('/api/chat', async (req, res) => {
 // Routes auth
 app.use('/auth', authRoutes);
 
-// Healthcheck utile pour monitoring
-app.get('/health', (req,res)=> res.json({ status:'ok', time: new Date().toISOString() }));
-
-// Middleware d’erreurs final
-app.use((err, req, res, next) => {
-    console.error('Erreur serveur finale :', err);
-    if (res.headersSent) return next(err);
-    res.status(500).json({ error: 'Erreur interne du serveur' });
-});
-
-// Ajout (en bas du fichier, avant listen éventuellement) :
-process.on('unhandledRejection', (reason) => {
-    console.error('UNHANDLED REJECTION:', reason);
-});
-process.on('uncaughtException', (err) => {
-    console.error('UNCAUGHT EXCEPTION:', err);
-});
-
-
-
-const start = async () => {
-    try {
-        await testDbConnection();
-        app.listen(PORT, () => {
-            const serverUrl = process.env.URL || `http://localhost:${PORT}`;
-            console.log(`🚀 Serveur démarré sur ${serverUrl}`);
-        });
-    } catch (e) {
-        console.error('[SERVER][FATAL] Arrêt (DB indisponible)');
-        process.exit(1);
-    }
-};
-start();
+// Listen
+if (typeof(PhusionPassenger) !== 'undefined') {
+    app.listen('passenger', () => {
+        console.log(`🚀 Serveur démarré!`);
+    });    
+} else {
+    app.listen(3000, () => {
+        console.log(`🚀 Serveur démarré!`);
+    });
+}
 
 
 

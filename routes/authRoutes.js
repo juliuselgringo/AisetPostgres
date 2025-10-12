@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import pool from '../models/db.js';
-import verifyToken from '../middlewares/verifyToken.js';
+const { Router } = require('express');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const pool = require('../models/db.js');
+const verifyToken = require('../middlewares/verifyToken.js');
 
 const router = Router();
 
@@ -80,5 +80,5 @@ router.post('/logout', verifyToken, (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
 

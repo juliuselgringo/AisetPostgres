@@ -1,9 +1,10 @@
 {
   "name": "aisenglishteacherv0.2",
   "version": "1.0.0",
-  "main": "script.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "server.js"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +22,6 @@
     "jsdom": "^26.1.0",
     "jsonwebtoken": "^9.0.2",
     "marked": "^16.1.2",
-    "mongoose": "^8.18.0",
     "pg": "^8.16.3"
   }
 }

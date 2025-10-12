@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import { findUserById } from '../models/User.js';
+const jwt = require('jsonwebtoken');
+const { findUserById } = require('../models/User.js');
 
 const verifyToken = async (req, res, next) => {
     try {
@@ -49,5 +49,5 @@ const optionalAuth = async (req, res, next) => {
     }
 };
 
-export default verifyToken;
-export { optionalAuth };
+module.exports = verifyToken;
+module.exports.optionalAuth = optionalAuth;

@@ -1,10 +1,10 @@
-import { JSDOM } from 'jsdom';
-import createDOMPurify from 'dompurify';
+const { JSDOM } = require('jsdom');
+const createDOMPurify = require('dompurify');
 
 const window = new JSDOM ('').window;
 const DOMPurify = createDOMPurify(window);
 
-export const sanitizeInputs = (req, res, next) => {
+const sanitizeInputs = (req, res, next) => {
     const { pseudo, email, password, passwordConfirmation } = req.body;
 
     req.body.sanitizedInputs = {
@@ -15,4 +15,6 @@ export const sanitizeInputs = (req, res, next) => {
     };
 
     next();
-}
+};
+
+module.exports = sanitizeInputs;

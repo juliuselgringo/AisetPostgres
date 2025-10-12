@@ -1,5 +1,5 @@
-import { Pool } from 'pg';
-import { config } from 'dotenv';
+const { Pool } = require('pg');
+const { config } = require('dotenv');
 // Charger le .env le plus tôt possible (sans casser le démarrage si absent)
 config();
 
@@ -38,7 +38,7 @@ if (pool) {
   });
 }
 
-export const testDbConnection = async () => {
+const testDbConnection = async () => {
   if (!pool) {
     console.warn('[DB][TEST] Ignoré: pool indisponible (variables manquantes)');
     return { ok: false, skipped: true };
@@ -53,4 +53,5 @@ export const testDbConnection = async () => {
   }
 };
 
-export default pool;
+module.exports = pool;
+module.exports.testDbConnection = testDbConnection;

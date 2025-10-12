@@ -1,9 +1,9 @@
-import pool from './db.js';
+const pool = require('./db.js');
 
 // Fonctions utilitaires pour la table users (à créer dans PostgreSQL)
 // Les champs doivent correspondre à la structure initiale du schéma Mongoose
 
-export const createUser = async ({ pseudo, email, password, authToken, tokenExpiry, isVerified = false, verificationToken, isPremium = false, stripeCustomerId, scores = {}, createdAt = new Date() }) => {
+const createUser = async ({ pseudo, email, password, authToken, tokenExpiry, isVerified = false, verificationToken, isPremium = false, stripeCustomerId, scores = {}, createdAt = new Date() }) => {
     const {
         restaurant = 0,
         wordGuessing = 0,
@@ -21,17 +21,17 @@ export const createUser = async ({ pseudo, email, password, authToken, tokenExpi
     return result.rows[0];
 };
 
-export const findUserByEmail = async (email) => {
+const findUserByEmail = async (email) => {
     const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
     return result.rows[0];
 };
 
-export const findUserById = async (id) => {
+const findUserById = async (id) => {
     const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
     return result.rows[0];
 };
 
-export const updateUserToken = async (email, authToken, tokenExpiry) => {
+const updateUserToken = async (email, authToken, tokenExpiry) => {
     // Forcer l'enregistrement de la date d'expiration en UTC (format ISO)
     const tokenExpiryUTC = tokenExpiry ? new Date(tokenExpiry).toISOString() : null;
     const result = await pool.query(
@@ -42,3 +42,10 @@ export const updateUserToken = async (email, authToken, tokenExpiry) => {
 };
 
 // Ajoute d'autres fonctions selon les besoins (update password, scores, etc.)
+
+module.exports = {
+    createUser,
+    findUserByEmail,
+    findUserById,
+    updateUserToken
+};
