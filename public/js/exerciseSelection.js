@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         
         try {
-            const response = await fetch(`$/restaurant.html`, {
+            const response = await fetch(`/restaurant.html`, {
                 method: 'GET',
                 credentials: 'include' // Inclure les cookies
             });
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         try{
-            const response = await fetch(`$/guess.html`, {
+            const response = await fetch(`/guess.html`, {
                 method: 'GET',
                 credentials: 'include'
             });
