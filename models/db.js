@@ -21,10 +21,9 @@ if (!missing.length) {
       password: process.env.PGPASSWORD,
       port: process.env.PGPORT ? parseInt(process.env.PGPORT, 10) : 5432,
       ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
-      max: 5,
-      idleTimeoutMillis: 10000,
-      connectionTimeoutMillis: 5000,
-      acquireTimeoutMillis: 5000
+      max: 10,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 10000
     });
   } catch(e) {
     console.error('[DB][INIT][ERROR]', e.message);

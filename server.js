@@ -8,8 +8,13 @@ const mistral = require('@mistralai/mistralai');
 const authRoutes = require('./routes/authRoutes.js');
 const verifyToken = require('./middlewares/verifyToken.js');
 
+// wrapper o2switch
+if(typeof PhusionPassenger !== "undefined"){
+    PhusionPassenger({autoInstall: false})
+}
+
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 config();
 const apiKey = process.env.MISTRAL_API_KEY;
@@ -96,9 +101,10 @@ app.use('/auth', authRoutes);
 
 // Listen
 if (typeof PhusionPassenger !== 'undefined') {
-    // Mode production avec Passenger (o2switch) - Export de l'app
-    module.exports = app;
-    console.log(`🚀 Application configurée pour Passenger (o2switch)!`);
+    // Mode production avec Passenger (o2switch)
+    app.listen('passenger', () => {
+        console.log(`🚀 Serveur démarré en mode Passenger!`);
+    });    
 } else {
     // Mode développement local
     app.listen(PORT, () => {
