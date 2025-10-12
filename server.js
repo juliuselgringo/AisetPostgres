@@ -100,13 +100,15 @@ app.post('/api/chat', async (req, res) => {
 app.use('/auth', authRoutes);
 
 // Listen
-if (typeof(PhusionPassenger) !== 'undefined') {
+if (typeof PhusionPassenger !== 'undefined') {
+    // Mode production avec Passenger (o2switch)
     app.listen('passenger', () => {
-        console.log(`🚀 Serveur démarré!`);
+        console.log(`🚀 Serveur démarré en mode Passenger!`);
     });    
 } else {
-    app.listen(3000, () => {
-        console.log(`🚀 Serveur démarré!`);
+    // Mode développement local
+    app.listen(PORT, () => {
+        console.log(`🚀 Serveur démarré sur le port ${PORT}!`);
     });
 }
 
