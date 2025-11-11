@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         wordsToUseDisplay.appendChild(wordElement);
     });
     
+    // Event listener du bouton envoyer
     sendButton.addEventListener("click", (e) => {
         e.preventDefault();
 
@@ -93,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response =>response.json())
         .then(data => {
-            console.log("success: ", data);
             const responseChat = marked.parse(data.reply);
             const serverMessageElement = document.createElement("div");
             serverMessageElement.innerHTML = `<strong>Le Chat:</strong> ${responseChat}`;

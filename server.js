@@ -6,6 +6,7 @@ const { config } = require('dotenv');
 const mistral = require('@mistralai/mistralai');
 
 const authRoutes = require('./routes/authRoutes.js');
+const guessRoutes = require('./routes/guessRoutes.js');
 const verifyToken = require('./middlewares/verifyToken.js');
 const sanitizeMessage = require('./middlewares/sanitizeMessage.js');
 
@@ -21,6 +22,9 @@ if (!apiKey) {
 }
 
 const client = apiKey ? new mistral.Mistral({ apiKey }) : null;
+
+// Partager le client Mistral avec les routes
+app.set('mistralClient', client);
 
 // Définition des origines autorisées pour CORS
 const allowedOrigins = [
@@ -93,37 +97,10 @@ app.post('/api/chat', sanitizeMessage, async (req, res) => {
     }
 });
 
-app.post('/api/guess', sanitizeMessage, async (req, res) => {
-    try {
-        if (!client) return res.status(503).json({ message: 'Service indisponible (clé API manquante)' });
-        
-        // Utiliser le message sanitisé
-        const userMessage = req.body.sanitizedMessage.message;
-        if (!userMessage || typeof userMessage !== 'string') {
-            return res.status(400).json({ message: 'message requis' });
-        }
-        
-        // TODO: Implémenter logique spécifique pour guess
-        // Exemple d'appel Mistral pour le jeu de devinettes
-        const chatResponse = await client.chat.complete({
-            model: 'mistral-small-latest',
-            messages: [
-                {
-                    role: 'system',
-                    content: 'You are a word guessing game helper. Analyze the user guess and provide helpful hints.'
-                },
-                { role: 'user', content: userMessage }
-            ]
-        });
-        return res.json({ reply: chatResponse.choices[0].message.content });
-    } catch (err) {
-        console.error('[GUESS][ERROR]', err.message);
-        return res.status(500).json({ message: 'Erreur interne (guess)' });
-    }
-});
 
-// Routes auth
+// Routes auth et guess
 app.use('/auth', authRoutes);
+app.use('/api', guessRoutes);
 
 // Listen
 if (typeof PhusionPassenger !== 'undefined') {
