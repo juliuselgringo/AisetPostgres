@@ -38,7 +38,7 @@ body{
     background-color: white;
 }
 
-#words-to-use{
+#words-to-use, #wordToGuess{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -75,4 +75,8 @@ body{
     margin: 5px;
     border-radius: 8px;
     box-shadow: 3px 3px 3px 3px rgb(179, 178, 178);
+}
+
+.back-btn{
+    margin-bottom: 10px;
 }

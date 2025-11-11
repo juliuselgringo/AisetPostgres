@@ -7,6 +7,7 @@ const mistral = require('@mistralai/mistralai');
 
 const authRoutes = require('./routes/authRoutes.js');
 const verifyToken = require('./middlewares/verifyToken.js');
+const sanitizeMessage = require('./middlewares/sanitizeMessage.js');
 
 const app = express();
 const PORT = 3000;
@@ -66,10 +67,12 @@ app.get('/guess.html', verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'guess.html'));
 });
 
-app.post('/api/chat', async (req, res) => {
+app.post('/api/chat', sanitizeMessage, async (req, res) => {
     try {
         if (!client) return res.status(503).json({ message: 'Service indisponible (clé API manquante)' });
-        const userMessage = req.body.message;
+        
+        // Utiliser le message sanitisé
+        const userMessage = req.body.sanitizedMessage.message;
         if (!userMessage || typeof userMessage !== 'string') {
             return res.status(400).json({ message: 'message requis' });
         }
@@ -78,7 +81,7 @@ app.post('/api/chat', async (req, res) => {
             messages: [
                 {
                     role: 'system',
-                    content: 'You are an English teacher who speaks only in simple English. Analyse each student sentence (restaurant customer role-play), give concise natural suggestions or congratulate if fine.'
+                    content: 'You are an English teacher. You only speak English and use simple vocabulary. The user sends you a message in a restaurant role-play context. Your response must include two phases: 1- analysis -> Briefly analyze the user\'s message. Suggest a correction or congratulate the user if their sentence is correct. 2-role-play –> If you think the user is playing the role of a customer, respond as a server. If you think the user is playing the role of a server, respond as a customer. '
                 },
                 { role: 'user', content: userMessage }
             ]
@@ -87,6 +90,35 @@ app.post('/api/chat', async (req, res) => {
     } catch (err) {
         console.error('[CHAT][ERROR]', err.message);
         return res.status(500).json({ message: 'Erreur interne (chat)' });
+    }
+});
+
+app.post('/api/guess', sanitizeMessage, async (req, res) => {
+    try {
+        if (!client) return res.status(503).json({ message: 'Service indisponible (clé API manquante)' });
+        
+        // Utiliser le message sanitisé
+        const userMessage = req.body.sanitizedMessage.message;
+        if (!userMessage || typeof userMessage !== 'string') {
+            return res.status(400).json({ message: 'message requis' });
+        }
+        
+        // TODO: Implémenter logique spécifique pour guess
+        // Exemple d'appel Mistral pour le jeu de devinettes
+        const chatResponse = await client.chat.complete({
+            model: 'mistral-small-latest',
+            messages: [
+                {
+                    role: 'system',
+                    content: 'You are a word guessing game helper. Analyze the user guess and provide helpful hints.'
+                },
+                { role: 'user', content: userMessage }
+            ]
+        });
+        return res.json({ reply: chatResponse.choices[0].message.content });
+    } catch (err) {
+        console.error('[GUESS][ERROR]', err.message);
+        return res.status(500).json({ message: 'Erreur interne (guess)' });
     }
 });
 

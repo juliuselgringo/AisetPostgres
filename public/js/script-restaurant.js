@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         chatBox.scrollTop = chatBox.scrollHeight;
 
         
-        fetch(`$/api/chat`, {
+        fetch(`/api/chat`, {
             method:'POST',
             headers:{
                 'Content-Type': 'application/json',

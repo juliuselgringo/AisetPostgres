@@ -3,12 +3,15 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const pool = require('../models/db.js');
 const verifyToken = require('../middlewares/verifyToken.js');
+const sanitizeInputs = require('../middlewares/sanitizeInputs.js');
+const sanitizeLogin = require('../middlewares/sanitizeLogin.js');
 
 const router = Router();
 
-router.post('/register', async (req, res) => {
+router.post('/register', sanitizeInputs, async (req, res) => {
   try {
-    const { pseudo, email, password, passwordConfirmation } = req.body;
+    // Utiliser les données sanitisées
+    const { pseudo, email, password, passwordConfirmation } = req.body.sanitizedInputs;
 
     if (!pseudo || !email || !password || !passwordConfirmation) {
       return res.status(400).json({ message: 'Tous les champs sont requis' });
@@ -39,9 +42,10 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', sanitizeLogin, async (req, res) => {
   try {
-    const { email, password } = req.body;
+    // Utiliser les données sanitisées
+    const { email, password } = req.body.sanitizedLogin;
     if (!email || !password)
       return res.status(400).json({ message: 'Email et mot de passe requis' });
 
